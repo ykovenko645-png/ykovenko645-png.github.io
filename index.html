@@ -1,0 +1,261 @@
+
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  Talisman.com
+      <h1 class="title">Hello World!</h1>index.html
+
+
+      <p id="currentTime"></p>
+      <script src="script.js"></script>
+  </body>
+</html>index.html
+
+(HTML, CSS, JavaScript) S2026W07.trophies.mdS2026W07.trophies.media="<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talisman.com — Музичний портал</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1db954;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .upload-section {
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+
+        .upload-section h2 {
+            margin-bottom: 15px;
+            color: #1db954;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
+        button.btn-submit {
+            background-color: #1db954;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        button.btn-submit:hover {
+            background-color: #1aa34a;
+        }
+
+        .music-list-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .track-card {
+            background-color: #1e1e1e;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-left: 4px solid #1db954;
+        }
+
+        .track-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .track-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .track-artist {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .track-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        audio {
+            height: 40px;
+            outline: none;
+        }
+
+        .btn-download {
+            background-color: #333;
+            color: #1db954;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: 1px solid #1db954;
+            transition: all 0.3s;
+        }
+
+        .btn-download:hover {
+            background-color: #1db954;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #181818;
+            color: #777;
+            border-top: 1px solid #282828;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Talisman.com</h1>
+        <p>Український музичний портал — Слухай, Завантажуй, Ділись</p>
+    </header>
+
+    <main>
+        <!-- Форма завантаження треку -->
+        <section class="upload-section">
+            <h2>Завантажити свій трек</h2>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="artist">Виконавець / Гурт:</label>
+                    <input type="text" id="artist" placeholder="Наприклад: Океан Ельзи" required>
+                </div>
+                <div class="form-group">
+                    <label for="title">Назва треку:</label>
+                    <input type="text" id="title" placeholder="Наприклад: Обійми" required>
+                </div>
+                <div class="form-group">
+                    <label for="audioFile">Аудіофайл (.mp3, .wav):</label>
+                    <input type="file" id="audioFile" accept="audio/*" required>
+                </div>
+                <button type="submit" class="btn-submit">Опублікувати трек</button>
+            </form>
+        </section>
+
+        <!-- Список треків -->
+        <section class="music-list-section">
+            <h2>Популярні треки</h2>
+            <div id="trackList">
+                <!-- Сюди будуть додаватися завантажені треки -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Talisman.com. Усі права захищено.</p>
+    </footer>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const trackList = document.getElementById('trackList');
+
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const artist = document.getElementById('artist').value;
+            const title = document.getElementById('title').value;
+            const fileInput = document.getElementById('audioFile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+
+                // Створення картки треку
+                const trackCard = document.createElement('div');
+                trackCard.className = 'track-card';
+
+                trackCard.innerHTML = `
+                    <div class="track-info">
+                        <div class="track-title">${title}</div>
+                        <div class="track-artist">${artist}</div>
+                    </div>
+                    <div class="track-controls">
+                        <audio controls src="${fileURL}"></audio>
+                        <a href="${fileURL}" download="${artist} - ${title}.mp3" class="btn-download">Скачати</a>
+                    </div>
+                `;
+
+                // Додаємо новий трек на початок списку
+                trackList.prepend(trackCard);
+
+                // Очищення форми
+                uploadForm.reset();
+            }
+        });
+    </script>
+</body>
+</html>
+"
